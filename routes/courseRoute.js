@@ -113,25 +113,7 @@ CourseRouter.patch('/courses/:courseId',auth, async (req, res) => {
     }
 });
 
-// PATCH request to add a new notification to a course
-CourseRouter.patch('/courses/:courseId',auth, async (req, res) => {
-    try {
-        const courseId = req.params.courseId;
-        const course = await courseModel.findById(courseId);
-        if (!course) {
-            return res.status(404).send({ message: 'Course not found' });
-        }
 
-        const newLecture = req.body;
-        course.lecture.push(newLecture);
-        await course.save();
-
-        res.status(200).send(course);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send({ message: 'Server Error' });
-    }
-});
 
 // POST request to add a new notification to a course
 CourseRouter.post('/courses/:courseId/notifications',auth, async (req, res) => {
